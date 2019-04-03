@@ -1,7 +1,6 @@
 # Online-Election-System
 A Electronic System which can conduct Elections using any device with Internet Connectivity.
 
-An API for Managing E-Products built using NodeJS - Express.
 
 # Installation:
 $ pip install django     <br />
