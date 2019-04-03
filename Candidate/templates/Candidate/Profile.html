@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'OnlineElectionSystem/base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    Profile
+    {% endblock %}
+</head>
+<body>
+
+{% block body %}
+
+        {% csrf_token %}
+            <div class = 'container'>
+            <div class = "panel panel-default col-md-12">
+                <div class = "col-md-4">
+                    <div class = "album">
+                        <a href = ""><img  src = "{{ object.Profile.url }}" class = "img-responsive" width="400" height="236"></a>
+                    </div>
+                </div>
+                <div class = "col-md-8">
+                    <h3><b><span id={{partyInfo.pk}}></span></b><br><b>Name: </b>{{ object.name }}</b></h3>
+                    <h3><b>Party Code: </b>{{ object.Party_Name }}</b></h3>
+
+                    <h3><b>Age: </b>{{ object.age }}</h3>
+                    <h3><b>Sex: </b>{{ object.sex }}</h3>
+                    <h3><b>Pin: </b>{{ object.pin }}</h3>
+
+                </div>
+
+
+
+            </div>
+
+            </div>
+
+
+{% endblock %}
+</body>
+</html>

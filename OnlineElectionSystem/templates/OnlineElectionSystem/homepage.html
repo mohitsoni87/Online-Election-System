@@ -1,0 +1,64 @@
+{% extends 'OnlineElectionSystem/base.html' %}
+
+{% block title%}Online Election System{% endblock %}
+{% block body %}
+
+    {% if user.is_authenticated %}
+            <h4><object align = "right"> <b>Date: </b>{{ dateTimeObject.date }}
+
+                <b> Time: </b>{{ dateTimeObject.time }}
+            </object>
+            </h4>
+            <br>
+            <!--EMAIL NOT VERIFIED -->
+            {% if not user.acc_activation %}
+                <h4 class = "alert alert-danger"><b>You account is not verified yet. We've sent a mail on {{ user.email }}. Please check your mail & verify your account to vote and be a responsible citizen.</b></h4>
+            <!--EMAIL VERIFIED -->
+            {% else %}
+                {% if not user.vote %}
+                <center>
+
+                    <h4><b><br>Your Region of Voting is {{ data.regionOfVoting }} - {{ data.pin }}</b><br><br>Date of Election is from <b>{{ electionData.Startdate.date }}</b> at <b>{{ electionData.Startdate.time }}</b> till <b>{{ electionData.Enddate.date }} at {{ electionData.Enddate.time }}</b></h4>
+
+                </center>
+                {% endif %}
+                <br>
+                <!--VOTED -->
+
+                {% if user.vote %}
+                    <center><h4 class = "alert alert-success">Your Vote is already Registered. Thank you!</h4></center>
+                    <center><h4 >Election Result date is {{ electionData.Resultdate }}</h4></center>
+
+                    {% if electionResult %}
+                        <center><h4 >Election Results available!! <a href = "{% url 'ElectionResult:ElectionResult' data.pin  %}"   >Click here </a> to check it!</h4></center>
+
+                    {% endif %}
+                <!-- VOTING NOT DONE -->
+                {% elif electionStatus %}
+
+                    <h4><center>Election is live. Please <a href="{% url 'Election:ConductElection' data.pin  %}">Click here</a></center></h4>
+
+                {% endif %}
+            {% endif %}
+
+
+
+
+
+
+
+    <!--<h4 class = "alert alert-danger">Please Log in or Register to access Go Kart.</h4>-->
+
+    {% endif %}
+    <div class = "container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <center><h1><font size="100%">Welcome to Online Election System</font></h1></center>
+
+    </div>
+
+{% endblock %}

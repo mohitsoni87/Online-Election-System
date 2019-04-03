@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% extends 'OnlineElectionSystem/base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    {{ partyInfo.Name }}
+    {% endblock %}
+</head>
+<body>
+
+
+{% block body %}
+        {% csrf_token %}
+            <div class = 'container'>
+            <div class = "panel panel-default col-md-12">
+                <div class = "col-md-4">
+                    <div class = "album">
+                        <a href = ""><img  src = "{{ partyInfo.Logo.url }}" class = "img-responsive" width="400" height="236"></a>
+                    </div>
+                </div>
+                <div class = "col-md-8">
+                <h3><b><span id={{partyInfo.pk}}></span></b><br>&nbsp;<b>Name: </b>{{ partyInfo.Name }}</b></h3>
+                <h3>&nbsp;<b>Party Code: </b>{{ partyInfo.UniqueKey }}</b></h3>
+                <h3>&nbsp;<b>Headquarters: </b>{{ partyInfo.Headquarters }}</h3>
+                <h3>&nbsp;<b>President: </b>{{ partyInfo.President }}</h3>
+                <h3><b>About: </b>{{ partyInfo.About }}</h3>
+                </div>
+
+
+
+            </div>
+
+            </div>
+
+
+{% endblock %}
+</body>
+</html>

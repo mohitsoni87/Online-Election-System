@@ -1,0 +1,69 @@
+
+{% extends 'OnlineElectionSystem/base.html' %}
+{% block title %}
+{{ query }}
+{% endblock %}
+{% block body %}
+{% load staticfiles%}
+<div class = 'container'>
+    <h2>Results for {{ query }}</h2>
+</div>
+{% if status == "loop" %}
+    {% if electionResult %}
+            <div class = 'container'>
+
+        <h3>&nbsp;Election Results available for {{ query }}.<b><a href="{% url 'ElectionResult:ElectionResult' query  %}"> Click here to check out!</a> </b></h3>
+
+            </div>
+    {% endif %}
+    {% for field in sector_object %}
+        {% csrf_token %}
+            <div class = 'container'>
+            <div class = "panel panel-default col-md-12">
+                <div class = "panel panel-default col-md-4">
+                    <div class = "album">
+                        <a href = ""><img  src = "{{ field.Logo.url }}" class = "img-responsive" width="400" height="236"></a>
+                    </div>
+                </div>
+                <h3> <br>&nbsp;Name: <b><a href="{% url 'PartyData:PartyData' field.UniqueKey %}">{{ field.Party_Name }}</b></a></h3>
+                <h3>&nbsp;Party Code: <b><a href="{% url 'PartyData:PartyData' field.UniqueKey %}">{{ field.UniqueKey }}</a></b></h3>
+                <h3>&nbsp;Candidate Name: <b> <a href ="{% url 'Candidate:profile' field.pin field.UniqueKey %}">{{ field.CandidateName }}</a></b></h3>
+                <h3>&nbsp;Pin Code: <b> {{ field.pin }}</b></h3>
+                <form action = "{% url 'PartyData:PartyData' field.UniqueKey %}" method="POST" style="display:inline">
+                    {% csrf_token %}
+                    &nbsp;&nbsp;&nbsp;<button type="submit" class = "btn btn-primary" name = 'PartyVar' value = '{{ field.pk }}'>&nbsp;View Party page</button>
+                </form>
+            </div>
+
+            </div>
+
+        {% endfor %}
+
+{% else %}
+    {% for field in party_object %}
+        {% csrf_token %}
+            <div class = 'container'>
+            <div class = "panel panel-default col-md-12">
+                <div class = "panel panel-default col-md-4">
+                    <div class = "album">
+                        <a href = ""><img  src = "{{ field.Logo.url }}" class = "img-responsive" width="400" height="236"></a>
+                    </div>
+                </div>
+                <h3><br>&nbsp;Name: <b>{{ field.Name }}</b></h3>
+                <h3>&nbsp;Party Code: <b>{{ field.UniqueKey }}</b></h3>
+
+                <form action = "{% url 'PartyData:PartyData'  field.UniqueKey %}" method="POST" style="display:inline">
+                    {% csrf_token %}
+                    &nbsp;&nbsp;&nbsp;<button type="submit" class = "btn btn-primary" name = 'PartyVar' value = '{{ field.pk }}'>&nbsp;View Party page</button>
+                </form>
+            </div>
+
+            </div>
+
+        {% endfor %}
+
+
+{% endif %}
+
+
+{% endblock %}

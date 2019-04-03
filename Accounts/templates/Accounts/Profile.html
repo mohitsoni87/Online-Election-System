@@ -1,0 +1,64 @@
+{% extends 'OnlineElectionSystem/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Profile{% endblock %}
+{% block body %}
+
+
+<div class = 'container'>
+
+    <table class = "table table-striped">
+
+        <tr>
+            <td><h4><b>Name&nbsp;</b></h4></td>
+            <td><h4>{{ object.first_name }}   {{ object.last_name }}</h4></td>
+        </tr>
+
+        <tr>
+            <td><h4><b>Age</b></h4></td>
+            <td><h4>{{ object.Age }}</h4></td>
+        </tr>
+
+        <tr>
+            <td><h4><b>Sex</b></h4></td>
+            <td><h4>{{ object.Sex }}</h4></td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4><b>Email</b></h4>
+            </td>
+            <td>
+                <h4>{{ object.email }}</h4>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4><b>Voter ID&nbsp;&nbsp;</b></h4>
+            </td>
+            <td>
+                <h4> {{ object.VoterID }}</h4>
+            </td>
+        </tr>
+
+        <tr>
+            <td><h4><b>Contact Number&nbsp;&nbsp; </b></h4></td>
+            <td><h4>{{ object.mobile_number }}</h4></td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4><b>Pin Code</b></h4>
+            </td>
+            <td>
+                <h4>{{ object.pin }}</h4>
+            </td>
+        </tr>
+        <tr>
+            <td><h4><b>Current Region of Voting&nbsp;&nbsp;</b></h4></td>
+            <td><h4>{{ object.regionOfVoting }}</h4></td>
+        </tr>
+
+    </table>
+</div>
+{% endblock %}

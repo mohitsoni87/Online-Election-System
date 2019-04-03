@@ -1,0 +1,43 @@
+{% extends 'OnlineElectionSystem/base.html' %}
+{% block title%}Election Page{% endblock %}
+{% block body %}
+
+
+<script>
+function AlertWindow(name){
+
+var confirmation = confirm('Are you sure you want to ' + name + '?');
+if( confirmation == true ) {
+      document.write ("Your vote has been successfully registered....\n Please wait while we re-direct you to the Homepage :)." );
+      location.replace("/submit/" + name)
+
+}
+}
+</script>
+{% if not  user.vote  %}
+    <center><h4 class = "alert alert-danger"><b>NOTE: You can only vote once. </b></h4></center>
+    {% for field in data %}
+                {% csrf_token %}
+                <div class = 'container'>
+                <div class = "panel panel-default col-md-12">
+                    <div class = "panel panel-default col-md-4">
+                        <div class = "album">
+                            <a href = ""><img  src = "{{ field.Logo.url }}" class = "img-responsive" width="400" height="236"></a>
+                        </div>
+                    </div>
+                    <h3><br>&nbsp;Name: <b>{{ field.Party_Name }}</b></h3>
+                    <h3>&nbsp;Party Code: <b>{{ field.UniqueKey }}</b></h3>
+                    <h3>Candidate Name: <b><a href="{% url 'Candidate:profile' field.pin field.UniqueKey %}">{{ field.CandidateName }}</a></b></h3>
+                    &nbsp;&nbsp;&nbsp;<button type="submit" onclick = "AlertWindow('{{field.UniqueKey}}')" class = "btn btn-success" name = 'Buy' value = '{{ field.pk }}'>&nbsp;Vote</button>
+                    <form action = "{% url 'PartyData:PartyData'  field.UniqueKey %}" method="POST" style="display:inline">
+                        {% csrf_token %}
+                        &nbsp;&nbsp;&nbsp;<button type="submit" class = "btn btn-primary">&nbsp;View Party page</button>
+                    </form>
+                </div>
+
+                </div>
+    {% endfor %}
+{% else %}
+    <center><h4 class = "alert alert-success">Your Vote is already Registered. Thank you!</h4></center>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,5 @@
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'e143570@gmail.com'
+EMAIL_HOST_PASSWORD = 'Mht-9769099'
+EMAIL_PORT = 587
